@@ -1,281 +1,960 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ergonomics in Physical Therapy</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--dp:#6B21A8;--dp2:#7C3AED;--dp3:#4C1D95;--gold:#FBBF24;--gold2:#F59E0B;--gold3:#FDE68A;--bg:#6B21A8;--card:rgba(49,10,90,.55);--card-hover:rgba(60,15,110,.7);--text:#FBBF24;--sub:#FDE68A;--body:#FFF8E7;--accent:#E9D5FF}
-html{scroll-behavior:smooth}
-body{font-family:'Outfit',sans-serif;background:linear-gradient(160deg,#581C87 0%,#6B21A8 30%,#7C3AED 60%,#6B21A8 100%);color:var(--text);overflow-x:hidden;background-attachment:fixed}
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(1.5);background:rgba(76,29,149,.75);border-bottom:1px solid rgba(251,191,36,.15);transition:all .3s;box-shadow:0 4px 30px rgba(0,0,0,.2)}
-nav .logo{font-weight:800;font-size:1.3rem;background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-nav .links{display:flex;gap:1.5rem;flex-wrap:wrap}
-nav .links a{color:var(--gold);text-decoration:none;font-size:.85rem;font-weight:400;transition:color .3s;position:relative}
-nav .links a:hover{color:#fff}
-nav .links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--gold);transition:width .3s}
-nav .links a:hover::after{width:100%}
-.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:101}
-.burger span{width:25px;height:2px;background:var(--gold);transition:.3s}
-/* HERO */
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(251,191,36,.12),transparent 70%);top:-100px;right:-200px;border-radius:50%;animation:pulse 6s ease-in-out infinite}
-.hero::after{content:'';position:absolute;width:400px;height:400px;background:radial-gradient(circle,rgba(124,58,237,.5),transparent 70%);bottom:-50px;left:-100px;border-radius:50%;animation:pulse 8s ease-in-out infinite reverse}
-@keyframes pulse{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.2);opacity:1}}
-.hero h1{font-size:clamp(2.5rem,6vw,4.5rem);font-weight:800;line-height:1.1;margin-bottom:1rem;position:relative;color:var(--gold)}
-.hero h1 .gold{background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hero p{font-size:clamp(1rem,2.5vw,1.4rem);color:var(--body);max-width:600px;margin-bottom:2rem}
-.hero .badge{display:inline-block;padding:.6rem 1.8rem;border:2px solid var(--gold);border-radius:50px;color:var(--gold);font-weight:600;font-size:.95rem;animation:glow 3s ease-in-out infinite;cursor:default;background:rgba(251,191,36,.08)}
-@keyframes glow{0%,100%{box-shadow:0 0 8px rgba(251,191,36,.15),inset 0 0 8px rgba(251,191,36,.05)}50%{box-shadow:0 0 30px rgba(251,191,36,.35),inset 0 0 15px rgba(251,191,36,.1)}}
-.scroll-arrow{position:absolute;bottom:2rem;animation:bounce 2s infinite}
-.scroll-arrow svg{width:30px;height:30px;stroke:var(--gold);fill:none}
-@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
-/* SECTIONS */
-section{padding:5rem 2rem;max-width:1200px;margin:0 auto}
-.section-title{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;margin-bottom:.5rem;text-align:center}
-.section-sub{text-align:center;color:var(--sub);margin-bottom:3rem;font-size:1rem}
-.section-title .gold{background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-/* CARDS */
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
-.card{background:var(--card);backdrop-filter:blur(10px);border:1px solid rgba(251,191,36,.1);border-radius:16px;padding:1.8rem;cursor:pointer;transition:all .4s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.15)}
-.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform:scaleX(0);transition:transform .4s;transform-origin:left}
-.card:hover::before{transform:scaleX(1)}
-.card:hover{transform:translateY(-6px);border-color:rgba(251,191,36,.3);box-shadow:0 20px 50px rgba(0,0,0,.25),0 0 30px rgba(251,191,36,.08);background:var(--card-hover)}
-.card .icon{font-size:2rem;margin-bottom:.8rem;filter:drop-shadow(0 0 6px rgba(251,191,36,.3))}
-.card h3{font-size:1.15rem;font-weight:600;color:var(--gold);margin-bottom:.6rem}
-.card p{font-size:.9rem;color:var(--body);line-height:1.6}
-.card .detail{max-height:0;overflow:hidden;transition:max-height .5s ease;color:var(--gold3);font-size:.85rem;line-height:1.7;margin-top:.5rem;padding-top:0;border-top:0 solid rgba(251,191,36,.15)}
-.card.open .detail{max-height:300px;padding-top:.8rem;border-top-width:1px}
-.card .tap{font-size:.7rem;color:rgba(251,191,36,.35);margin-top:.8rem;text-align:right;letter-spacing:.5px;text-transform:uppercase}
-/* TOPIC HEADER */
-.topic-header{display:flex;align-items:center;gap:1rem;margin-bottom:2rem;padding:1.5rem;background:linear-gradient(135deg,rgba(49,10,90,.6),rgba(76,29,149,.4));border-radius:16px;border-left:4px solid var(--gold);box-shadow:0 4px 20px rgba(0,0,0,.15);backdrop-filter:blur(8px)}
-.topic-header .num{font-size:2.5rem;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;min-width:60px;text-align:center;filter:drop-shadow(0 0 10px rgba(251,191,36,.3))}
-.topic-header h2{font-size:1.5rem;font-weight:700;color:var(--gold)}
-.topic-header p{font-size:.85rem;color:var(--body);margin-top:.3rem;opacity:.85}
-/* DIVIDER */
-.divider{width:120px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:4rem auto;border-radius:2px;opacity:.5}
-/* TEAM */
-.team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem}
-.team-card{background:var(--card);backdrop-filter:blur(8px);border:1px solid rgba(251,191,36,.08);border-radius:12px;padding:1.2rem;text-align:center;transition:all .3s;box-shadow:0 2px 12px rgba(0,0,0,.1)}
-.team-card:hover{border-color:rgba(251,191,36,.25);transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,.2)}
-.team-card .avatar{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--gold2),var(--gold));display:flex;align-items:center;justify-content:center;margin:0 auto .8rem;font-weight:700;font-size:1.1rem;color:var(--dp3);box-shadow:0 4px 15px rgba(251,191,36,.25)}
-.team-card h4{font-size:.9rem;font-weight:600;color:var(--gold);margin-bottom:.3rem}
-.team-card span{font-size:.75rem;color:var(--body);opacity:.8}
-/* FOOTER */
-.questions{text-align:center;padding:6rem 2rem;position:relative}
-.questions h2{font-size:clamp(2rem,5vw,3.5rem);font-weight:800;margin-bottom:1rem;color:var(--gold)}
-.questions p{color:var(--body);font-size:1.1rem;max-width:500px;margin:0 auto 2rem}
-.questions .quote{display:inline-block;padding:1rem 2rem;border:1px solid rgba(251,191,36,.2);border-radius:12px;color:var(--gold);font-style:italic;font-size:1rem;background:rgba(251,191,36,.06);box-shadow:0 4px 20px rgba(0,0,0,.1)}
-footer{text-align:center;padding:2rem;color:var(--body);opacity:.5;font-size:.8rem;border-top:1px solid rgba(251,191,36,.1)}
-/* ANIMATION */
-.reveal{opacity:0;transform:translateY(30px);transition:all .6s cubic-bezier(.4,0,.2,1)}
-.reveal.visible{opacity:1;transform:translateY(0)}
-/* MOBILE */
-@media(max-width:768px){
-nav .links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(88,28,135,.97);flex-direction:column;align-items:center;justify-content:center;gap:2rem}
-nav .links.open{display:flex}
-nav .links a{font-size:1.2rem}
-.burger{display:flex}
-.cards{grid-template-columns:1fr}
-.team-grid{grid-template-columns:repeat(2,1fr)}
-section{padding:3rem 1.2rem}
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Ergonomics in Physical Therapy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --dp: #6B21A8;
+            --dp2: #7C3AED;
+            --dp3: #4C1D95;
+            --gold: #FBBF24;
+            --gold2: #F59E0B;
+            --gold3: #FDE68A;
+            --bg: #6B21A8;
+            --card: rgba(49, 10, 90, .55);
+            --card-hover: rgba(60, 15, 110, .7);
+            --text: #FBBF24;
+            --sub: #FDE68A;
+            --body: #FFF8E7;
+            --accent: #E9D5FF
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(160deg, #581C87 0%, #6B21A8 30%, #7C3AED 60%, #6B21A8 100%);
+            color: var(--text);
+            overflow-x: hidden;
+            background-attachment: fixed
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(24px) saturate(1.5);
+            background: rgba(76, 29, 149, .75);
+            border-bottom: 1px solid rgba(251, 191, 36, .15);
+            transition: all .3s;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, .2)
+        }
+
+        nav .logo {
+            font-weight: 800;
+            font-size: 1.3rem;
+            background: linear-gradient(135deg, var(--gold), var(--gold2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent
+        }
+
+        nav .links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap
+        }
+
+        nav .links a {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: .85rem;
+            font-weight: 400;
+            transition: color .3s;
+            position: relative
+        }
+
+        nav .links a:hover {
+            color: #fff
+        }
+
+        nav .links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width .3s
+        }
+
+        nav .links a:hover::after {
+            width: 100%
+        }
+
+        .burger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 101
+        }
+
+        .burger span {
+            width: 25px;
+            height: 2px;
+            background: var(--gold);
+            transition: .3s
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+            overflow: hidden
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(251, 191, 36, .12), transparent 70%);
+            top: -100px;
+            right: -200px;
+            border-radius: 50%;
+            animation: pulse 6s ease-in-out infinite
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(124, 58, 237, .5), transparent 70%);
+            bottom: -50px;
+            left: -100px;
+            border-radius: 50%;
+            animation: pulse 8s ease-in-out infinite reverse
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: .5
+            }
+
+            50% {
+                transform: scale(1.2);
+                opacity: 1
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            position: relative;
+            color: var(--gold)
+        }
+
+        .hero h1 .gold {
+            background: linear-gradient(135deg, var(--gold), var(--gold2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            color: var(--body);
+            max-width: 600px;
+            margin-bottom: 2rem
+        }
+
+        .hero .badge {
+            display: inline-block;
+            padding: .6rem 1.8rem;
+            border: 2px solid var(--gold);
+            border-radius: 50px;
+            color: var(--gold);
+            font-weight: 600;
+            font-size: .95rem;
+            animation: glow 3s ease-in-out infinite;
+            cursor: default;
+            background: rgba(251, 191, 36, .08)
+        }
+
+        @keyframes glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 8px rgba(251, 191, 36, .15), inset 0 0 8px rgba(251, 191, 36, .05)
+            }
+
+            50% {
+                box-shadow: 0 0 30px rgba(251, 191, 36, .35), inset 0 0 15px rgba(251, 191, 36, .1)
+            }
+        }
+
+        .scroll-arrow {
+            position: absolute;
+            bottom: 2rem;
+            animation: bounce 2s infinite
+        }
+
+        .scroll-arrow svg {
+            width: 30px;
+            height: 30px;
+            stroke: var(--gold);
+            fill: none
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(10px)
+            }
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 700;
+            margin-bottom: .5rem;
+            text-align: center
+        }
+
+        .section-sub {
+            text-align: center;
+            color: var(--sub);
+            margin-bottom: 3rem;
+            font-size: 1rem
+        }
+
+        .section-title .gold {
+            background: linear-gradient(135deg, var(--gold), var(--gold2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent
+        }
+
+        /* CARDS */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem
+        }
+
+        .card {
+            background: var(--card);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(251, 191, 36, .1);
+            border-radius: 16px;
+            padding: 1.8rem;
+            cursor: pointer;
+            transition: all .4s cubic-bezier(.4, 0, .2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .15)
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            transform: scaleX(0);
+            transition: transform .4s;
+            transform-origin: left
+        }
+
+        .card:hover::before {
+            transform: scaleX(1)
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(251, 191, 36, .3);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, .25), 0 0 30px rgba(251, 191, 36, .08);
+            background: var(--card-hover)
+        }
+
+        .card .icon {
+            font-size: 2rem;
+            margin-bottom: .8rem;
+            filter: drop-shadow(0 0 6px rgba(251, 191, 36, .3))
+        }
+
+        .card h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: .6rem
+        }
+
+        .card p {
+            font-size: .9rem;
+            color: var(--body);
+            line-height: 1.6
+        }
+
+        .card .detail {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .5s ease;
+            color: var(--gold3);
+            font-size: .85rem;
+            line-height: 1.7;
+            margin-top: .5rem;
+            padding-top: 0;
+            border-top: 0 solid rgba(251, 191, 36, .15)
+        }
+
+        .card.open .detail {
+            max-height: 300px;
+            padding-top: .8rem;
+            border-top-width: 1px
+        }
+
+        .card .tap {
+            font-size: .7rem;
+            color: rgba(251, 191, 36, .35);
+            margin-top: .8rem;
+            text-align: right;
+            letter-spacing: .5px;
+            text-transform: uppercase
+        }
+
+        /* TOPIC HEADER */
+        .topic-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(49, 10, 90, .6), rgba(76, 29, 149, .4));
+            border-radius: 16px;
+            border-left: 4px solid var(--gold);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .15);
+            backdrop-filter: blur(8px)
+        }
+
+        .topic-header .num {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--gold), var(--gold2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            min-width: 60px;
+            text-align: center;
+            filter: drop-shadow(0 0 10px rgba(251, 191, 36, .3))
+        }
+
+        .topic-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gold)
+        }
+
+        .topic-header p {
+            font-size: .85rem;
+            color: var(--body);
+            margin-top: .3rem;
+            opacity: .85
+        }
+
+        /* DIVIDER */
+        .divider {
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 4rem auto;
+            border-radius: 2px;
+            opacity: .5
+        }
+
+        /* TEAM */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem
+        }
+
+        .team-card {
+            background: var(--card);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(251, 191, 36, .08);
+            border-radius: 12px;
+            padding: 1.2rem;
+            text-align: center;
+            transition: all .3s;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, .1)
+        }
+
+        .team-card:hover {
+            border-color: rgba(251, 191, 36, .25);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, .2)
+        }
+
+        .team-card .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold2), var(--gold));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto .8rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--dp3);
+            box-shadow: 0 4px 15px rgba(251, 191, 36, .25)
+        }
+
+        .team-card h4 {
+            font-size: .9rem;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: .3rem
+        }
+
+        .team-card span {
+            font-size: .75rem;
+            color: var(--body);
+            opacity: .8
+        }
+
+        /* FOOTER */
+        .questions {
+            text-align: center;
+            padding: 6rem 2rem;
+            position: relative
+        }
+
+        .questions h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--gold)
+        }
+
+        .questions p {
+            color: var(--body);
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin: 0 auto 2rem
+        }
+
+        .questions .quote {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border: 1px solid rgba(251, 191, 36, .2);
+            border-radius: 12px;
+            color: var(--gold);
+            font-style: italic;
+            font-size: 1rem;
+            background: rgba(251, 191, 36, .06);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .1)
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--body);
+            opacity: .5;
+            font-size: .8rem;
+            border-top: 1px solid rgba(251, 191, 36, .1)
+        }
+
+        /* ANIMATION */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all .6s cubic-bezier(.4, 0, .2, 1)
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        /* MOBILE */
+        @media(max-width:768px) {
+            nav .links {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(88, 28, 135, .97);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2rem
+            }
+
+            nav .links.open {
+                display: flex
+            }
+
+            nav .links a {
+                font-size: 1.2rem
+            }
+
+            .burger {
+                display: flex
+            }
+
+            .cards {
+                grid-template-columns: 1fr
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            section {
+                padding: 3rem 1.2rem
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-<nav>
-<div class="logo">⚕ ERGO PT</div>
-<div class="links" id="navLinks">
-<a href="#hero">Home</a>
-<a href="#s1">Lecture Hall</a>
-<a href="#s2">Computer</a>
-<a href="#s3">Low Desk</a>
-<a href="#s4">Standard Desk</a>
-<a href="#s5">Hand Washing</a>
-<a href="#s6">Backpack</a>
-<a href="#s7">Phone Grip</a>
-<a href="#s8">Mouse & CTS</a>
-<a href="#team">Team</a>
-</div>
-<div class="burger" onclick="document.getElementById('navLinks').classList.toggle('open')">
-<span></span><span></span><span></span>
-</div>
-</nav>
+    <nav>
+        <div class="logo">⚕ ERGO PT</div>
+        <div class="links" id="navLinks">
+            <a href="#hero">Home</a>
+            <a href="#s1">Lecture Hall</a>
+            <a href="#s2">Computer</a>
+            <a href="#s3">Low Desk</a>
+            <a href="#s4">Standard Desk</a>
+            <a href="#s5">Hand Washing</a>
+            <a href="#s6">Backpack</a>
+            <a href="#s7">Phone Grip</a>
+            <a href="#s8">Mouse & CTS</a>
+            <a href="#team">Team</a>
+        </div>
+        <div class="burger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
 
-<!-- HERO -->
-<div class="hero" id="hero">
-<h1>Ergonomics in<br><span class="gold">Physical Therapy</span></h1>
-<p>Your health is the most precious gift — <strong>KEEP IT SAFE</strong></p>
-<div class="badge">We observed what you did wrong and we corrected it</div>
-<a href="#s1" class="scroll-arrow"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></a>
-</div>
+    <!-- HERO -->
+    <div class="hero" id="hero">
+        <h1>Ergonomics in<br><span class="gold">Physical Therapy</span></h1>
+        <p>Your health is the most precious gift — <strong>KEEP IT SAFE</strong></p>
+        <div class="badge">We observed what you did wrong and we corrected it</div>
+        <a href="#s1" class="scroll-arrow"><svg viewBox="0 0 24 24" stroke-width="2">
+                <path d="M12 5v14M19 12l-7 7-7-7" />
+            </svg></a>
+    </div>
 
-<!-- SECTION 1 -->
-<section id="s1" class="reveal">
-<div class="topic-header"><div class="num">01</div><div><h2>Bad Posture in the Lecture Hall</h2><p>Common postural faults students develop during long lectures</p></div></div>
-<div class="cards">
-<div class="card" onclick="this.classList.toggle('open')">
-<div class="icon">🪑</div><h3>Sacral Sitting</h3><p>Sliding down in rigid lecture chairs places body weight entirely on the sacrum.</p>
-<div class="detail">This flattens the lumbar curve, reversing the natural lordosis. Over time, it increases pressure on the posterior annulus of the L4-L5 and L5-S1 discs, potentially leading to disc bulges and chronic low back pain.</div><div class="tap">tap to learn more</div></div>
-<div class="card" onclick="this.classList.toggle('open')">
-<div class="icon">👀</div><h3>Forward Head Translation</h3><p>Straining to see the board from far away shifts the head forward.</p>
-<div class="detail">The upper cervical spine extends while the lower flexes, creating a "chin-poke" posture. For every inch the head moves forward, it adds roughly 10 lbs of force on the cervical spine, overloading the posterior neck muscles.</div><div class="tap">tap to learn more</div></div>
-<div class="card" onclick="this.classList.toggle('open')">
-<div class="icon">📐</div><h3>Asymmetrical Leaning</h3><p>Side-folding desks force prolonged lateral flexion and rotation.</p>
-<div class="detail">This uneven loading creates muscle imbalances between the left and right paraspinal muscles. The intervertebral discs experience asymmetric compression, and the facet joints on the concave side become overloaded.</div><div class="tap">tap to learn more</div></div>
-</div></section><div class="divider"></div>
+    <!-- SECTION 1 -->
+    <section id="s1" class="reveal">
+        <div class="topic-header">
+            <div class="num">01</div>
+            <div>
+                <h2>Bad Posture in the Lecture Hall</h2>
+                <p>Common postural faults students develop during long lectures</p>
+            </div>
+        </div>
+        <div class="cards">
+            <div class="card" onclick="this.classList.toggle('open')">
+                <div class="icon">🪑</div>
+                <h3>Sacral Sitting</h3>
+                <p>Sliding down in rigid lecture chairs places body weight entirely on the sacrum.</p>
+                <div class="detail">This flattens the lumbar curve, reversing the natural lordosis. Over time, it
+                    increases pressure on the posterior annulus of the L4-L5 and L5-S1 discs, potentially leading to
+                    disc bulges and chronic low back pain.</div>
+                <div class="tap">tap to learn more</div>
+            </div>
+            <div class="card" onclick="this.classList.toggle('open')">
+                <div class="icon">👀</div>
+                <h3>Forward Head Translation</h3>
+                <p>Straining to see the board from far away shifts the head forward.</p>
+                <div class="detail">The upper cervical spine extends while the lower flexes, creating a "chin-poke"
+                    posture. For every inch the head moves forward, it adds roughly 10 lbs of force on the cervical
+                    spine, overloading the posterior neck muscles.</div>
+                <div class="tap">tap to learn more</div>
+            </div>
+            <div class="card" onclick="this.classList.toggle('open')">
+                <div class="icon">📐</div>
+                <h3>Asymmetrical Leaning</h3>
+                <p>Side-folding desks force prolonged lateral flexion and rotation.</p>
+                <div class="detail">This uneven loading creates muscle imbalances between the left and right paraspinal
+                    muscles. The intervertebral discs experience asymmetric compression, and the facet joints on the
+                    concave side become overloaded.</div>
+                <div class="tap">tap to learn more</div>
+            </div>
+        </div>
+    </section>
+    <div class="divider"></div>
 
-<!-- SECTION 2 -->
-<section id="s2" class="reveal">
-<div class="topic-header"><div class="num">02</div><div><h2>Sitting Badly at the Computer</h2><p>How laptop use leads to musculoskeletal dysfunction</p></div></div>
-<div class="cards">
-<div class="card" onclick="this.classList.toggle('open')">
-<div class="icon">💻</div><h3>Upper Crossed Syndrome</h3><p>Hunching over a laptop tightens pectorals and weakens deep neck flexors.</p>
-<div class="detail">This classic pattern involves tight upper trapezius and levator scapulae paired with weak deep cervical flexors, plus tight pectoralis major/minor paired with weak lower trapezius and serratus anterior. It creates a self-reinforcing cycle of dysfunction.</div><div class="tap">tap to learn more</div></div>
-<div class="card" onclick="this.classList.toggle('open')">
-<div class="icon">🫁</div><h3>Thoracic Kyphosis</h3><p>A rounded upper back compresses the anterior chest wall.</p>
-<div class="detail">Excessive kyphosis reduces optimal breathing capacity by restricting rib cage expansion. It can decrease lung volume by up to 30%, leading to shallow breathing patterns and reduced oxygen delivery to tissues.</div><div class="tap">tap to learn more</div></div>
-<div class="card" onclick="this.classList.toggle('open')">
-<div class="icon">👁️</div><h3>Visual Strain</h3><p>Looking down at an un-elevated screen forces constant neck muscle work.</p>
-<div class="detail">The cervical extensors must constantly fight gravity to hold the head in a downward gaze. This sustained isometric contraction leads to muscle fatigue, tension headaches, and cervicogenic pain patterns.</div><div class="tap">tap to learn more</div></div>
-</div></section><div class="divider"></div>
+    <!-- SECTION 2 -->
+    <section id="s2" class="reveal">
+        <div class="topic-header">
+            <div class="num">02</div>
+            <div>
+                <h2>Sitting Badly at the Computer</h2>
+                <p>How laptop use leads to musculoskeletal dysfunction</p>
+            </div>
+        </div>
+        <div class="cards">
+            <div class="card" onclick="this.classList.toggle('open')">
+                <div class="icon">💻</div>
+                <h3>Upper Crossed Syndrome</h3>
+                <p>Hunching over a laptop tightens pectorals and weakens deep neck flexors.</p>
+                <div class="detail">This classic pattern involves tight upper trapezius and levator scapulae paired with
+                    weak deep cervical flexors, plus tight pectoralis major/minor paired with weak lower trapezius and
+                    serratus anterior. It creates a self-reinforcing cycle of dysfunction.</div>
+                <div class="tap">tap to learn more</div>
+            </div>
+            <div class="card" onclick="this.classList.toggle('open')">
+                <div class="icon">🫁</div>
+                <h3>Thoracic Kyphosis</h3>
+                <p>A rounded upper back compresses the anterior chest wall.</p>
+                <div class="detail">Excessive kyphosis reduces optimal breathing capacity by restricting rib cage
+                    expansion. It can decrease lung volume by up to 30%, leading to shallow breathing patterns and
+                    reduced oxygen delivery to tissues.</div>
+                <div class="tap">tap to learn more</div>
+            </div>
+            <div class="card" onclick="this.classList.toggle('open')">
+                <div class="icon">👁️</div>
+                <h3>Visual Strain</h3>
+                <p>Looking down at an un-elevated screen forces constant neck muscle work.</p>
+                <div class="detail">The cervical extensors must constantly fight gravity to hold the head in a downward
+                    gaze. This sustained isometric contraction leads to muscle fatigue, tension headaches, and
+                    cervicogenic pain patterns.</div>
+                <div class="tap">tap to learn more</div>
+            </div>
+        </div>
+    </section>
+    <div class="divider"></div>
 
-<!-- SECTION 3 -->
-<section id="s3" class="reveal">
-<div class="topic-header"><div class="num">03</div><div><h2>Studying on a Low Desk Level</h2><p>The hidden dangers of floor-level and coffee-table studying</p></div></div>
-<div class="cards">
-<div class="card" onclick="this.classList.toggle('open')">
-<div class="icon">📚</div><h3>Extreme Cervical Flexion</h3><p>Coffee table studying requires extreme neck bending.</p>
-<div class="detail">This dramatically increases intradiscal pressure in the cervical spine. At full flexion, the load on cervical discs can increase by 5-6 times compared to neutral, accelerating degenerative changes.</div><div class="tap">tap to learn more</div></div>
-<div class="card" onclick="this.classList.toggle('open')">
-<div class="icon">🧘</div><h3>Lack of Lumbar Support</h3><p>Floor sitting removes all external spinal support.</p>
-<div class="detail">Without a backrest, the erector spinae and multifidus must work continuously. This leads to rapid muscle fatigue, causing the spine to default into flexion — further increasing disc pressure.</div><div class="tap">tap to learn more</div></div>
-<div class="card" onclick="this.classList.toggle('open')">
-<div class="icon">🦵</div><h3>Hip Flexor Tightness</h3><p>Sitting cross-legged for hours shortens the iliopsoas.</p>
-<div class="detail">Adaptively shortened hip flexors pull the lumbar spine into lordosis when standing, creating an anterior pelvic tilt. This cascading dysfunction affects gait, pelvic floor function, and overall spinal alignment.</div><div class="tap">tap to learn more</div></div>
-</div></section><div class="divider"></div>
+    <!-- SECTION 3 -->
+    <section id="s3" class="reveal">
+        <div class="topic-header">
+            <div class="num">03</div>
+            <div>
+                <h2>Studying on a Low Desk Level</h2>
+                <p>The hidden dangers of floor-level and coffee-table studying</p>
+            </div>
+        </div>
+        <div class="cards">
+            <div class="card" onclick="this.classList.toggle('open')">
+                <div class="icon">📚</div>
+                <h3>Extreme Cervical Flexion</h3>
+                <p>Coffee table studying requires extreme neck bending.</p>
+                <div class="detail">This dramatically increases intradiscal pressure in the cervical spine. At full
+                    flexion, the load on cervical discs can increase by 5-6 times compared to neutral, accelerating
+                    degenerative changes.</div>
+                <div class="tap">tap to learn more</div>
+            </div>
+            <div class="card" onclick="this.classList.toggle('open')">
+                <div class="icon">🧘</div>
+                <h3>Lack of Lumbar Support</h3>
+                <p>Floor sitting removes all external spinal support.</p>
+                <div class="detail">Without a backrest, the erector spinae and multifidus must work continuously. This
+                    leads to rapid muscle fatigue, causing the spine to default into flexion — further increasing disc
+                    pressure.</div>
+                <div class="tap">tap to learn more</div>
+            </div>
+            <div class="card" onclick="this.classList.toggle('open')">
+                <div class="icon">🦵</div>
+                <h3>Hip Flexor Tightness</h3>
+                <p>Sitting cross-legged for hours shortens the iliopsoas.</p>
+                <div class="detail">Adaptively shortened hip flexors pull the lumbar spine into lordosis when standing,
+                    creating an anterior pelvic tilt. This cascading dysfunction affects gait, pelvic floor function,
+                    and overall spinal alignment.</div>
+                <div class="tap">tap to learn more</div>
+            </div>
+        </div>
+    </section>
+    <div class="divider"></div>
 
-<!-- SECTION 4 -->
-<section id="s4" class="reveal">
-<div class="topic-header"><div class="num">04</div><div><h2>Sitting Badly on a Standard Desk</h2><p>Even proper desks can cause harm with poor posture habits</p></div></div>
-<div class="cards">
-<div class="card" onclick="this.classList.toggle('open')">
-<div class="icon">🔄</div><h3>The "C" Curve</h3><p>Spine collapses into a C-shape with immense compressive forces.</p>
-<div class="detail">This posture places up to 200% more pressure on the anterior vertebral discs compared to upright sitting. The posterior ligaments are overstretched while the anterior structures are compressed — a recipe for disc herniation.</div><div class="tap">tap to learn more</div></div>
-<div class="card" onclick="this.classList.toggle('open')">
-<div class="icon">💪</div><h3>Shoulder Hiking</h3><p>A desk too high forces constant scapular elevation.</p>
-<div class="detail">Sustained elevation overworks the upper trapezius, causing trigger points and muscle spasms. This can refer pain to the temporal region, causing tension-type headaches that are often misdiagnosed.</div><div class="tap">tap to learn more</div></div>
-<div class="card" onclick="this.classList.toggle('open')">
-<div class="icon">🦶</div><h3>Dangling Feet</h3><p>Feet not flat on the floor tilt the pelvis backward.</p>
-<div class="detail">Posterior pelvic tilt from dangling feet flattens the lumbar lordosis, increases sacral pressure, and compresses the ischial tuberosities. Using a footrest to achieve 90° knee flexion corrects this chain.</div><div class="tap">tap to learn more</div></div>
-</div></section><div class="divider"></div>
+    <!-- SECTION 4 -->
+    <section id="s4" class="reveal">
+        <div class="topic-header">
+            <div class="num">04</div>
+            <div>
+                <h2>Sitting Badly on a Standard Desk</h2>
+                <p>Even proper desks can cause harm with poor posture habits</p>
+            </div>
+        </div>
+        <div class="cards">
+            <div class="card" onclick="this.classList.toggle('open')">
+                <div class="icon">🔄</div>
+                <h3>The "C" Curve</h3>
+                <p>Spine collapses into a C-shape with immense compressive forces.</p>
+                <div class="detail">This posture places up to 200% more pressure on the anterior vertebral discs
+                    compared to upright sitting. The posterior ligaments are overstretched while the anterior structures
+                    are compressed — a recipe for disc herniation.</div>
+                <div class="tap">tap to learn more</div>
+            </div>
+            <div class="card" onclick="this.classList.toggle('open')">
+                <div class="icon">💪</div>
+                <h3>Shoulder Hiking</h3>
+                <p>A desk too high forces constant scapular elevation.</p>
+                <div class="detail">Sustained elevation overworks the upper trapezius, causing trigger points and muscle
+                    spasms. This can refer pain to the temporal region, causing tension-type headaches that are often
+                    misdiagnosed.</div>
+                <div class="tap">tap to learn more</div>
+            </div>
+            <div class="card" onclick="this.classList.toggle('open')">
+                <div class="icon">🦶</div>
+                <h3>Dangling Feet</h3>
+                <p>Feet not flat on the floor tilt the pelvis backward.</p>
+                <div class="detail">Posterior pelvic tilt from dangling feet flattens the lumbar lordosis, increases
+                    sacral pressure, and compresses the ischial tuberosities. Using a footrest to achieve 90° knee
+                    flexion corrects this chain.</div>
+                <div class="tap">tap to learn more</div>
+            </div>
+        </div>
+    </section>
+    <div class="divider"></div>
 
-<!-- SECTION 5 -->
-<section id="s5" class="reveal">
-<div class="topic-header"><div class="num">05</div><div><h2>Poor Ergonomics in Hand Washing</h2><p>Medical professionals face unique ergonomic challenges</p></div></div>
-<div class="cards">
-<div class="card" onclick="this.classList.toggle('open')">
-<div class="icon">🚿</div><h3>Lumbar Over-Flexion</h3><p>Bending over a low sink strains the erector spinae.</p>
-<div class="detail">Low sinks force forward bending that can exceed 45° of lumbar flexion. At this angle, the passive ligamentous system bears most of the load, and the erector spinae are at a mechanical disadvantage — increasing injury risk.</div><div class="tap">tap to learn more</div></div>
-<div class="card" onclick="this.classList.toggle('open')">
-<div class="icon">🤲</div><h3>Wrist Deviations</h3><p>Awkward scrubbing angles cause ulnar or radial deviation.</p>
-<div class="detail">Repeated deviation from neutral wrist position irritates the carpal tunnel structures and the extensor/flexor tendons. Healthcare workers who scrub 10+ times daily are at significantly elevated risk for tendinopathy.</div><div class="tap">tap to learn more</div></div>
-<div class="card" onclick="this.classList.toggle('open')">
-<div class="icon">⏱️</div><h3>Static Neck Loading</h3><p>Looking down during extended scrubbing tenses cervical extensors.</p>
-<div class="detail">Medical-grade scrubbing requires 3-5 minutes of sustained downward gaze and focused attention. This static cervical loading causes ischemia in the neck extensors, building up metabolic waste products that trigger pain.</div><div class="tap">tap to learn more</div></div>
-</div></section><div class="divider"></div>
+    <!-- SECTION 5 -->
+    <section id="s5" class="reveal">
+        <div class="topic-header">
+            <div class="num">05</div>
+            <div>
+                <h2>Poor Ergonomics in Hand Washing</h2>
+                <p>Medical professionals face unique ergonomic challenges</p>
+            </div>
+        </div>
+        <div class="cards">
+            <div class="card" onclick="this.classList.toggle('open')">
+                <div class="icon">🚿</div>
+                <h3>Lumbar Over-Flexion</h3>
+                <p>Bending over a low sink strains the erector spinae.</p>
+                <div class="detail">Low sinks force forward bending that can exceed 45° of lumbar flexion. At this
+                    angle, the passive ligamentous system bears most of the load, and the erector spinae are at a
+                    mechanical disadvantage — increasing injury risk.</div>
+                <div class="tap">tap to learn more</div>
+            </div>
+            <div class="card" onclick="this.classList.toggle('open')">
+                <div class="icon">🤲</div>
+                <h3>Wrist Deviations</h3>
+                <p>Awkward scrubbing angles cause ulnar or radial deviation.</p>
+                <div class="detail">Repeated deviation from neutral wrist position irritates the carpal tunnel
+                    structures and the extensor/flexor tendons. Healthcare workers who scrub 10+ times daily are at
+                    significantly elevated risk for tendinopathy.</div>
+                <div class="tap">tap to learn more</div>
+            </div>
+            <div class="card" onclick="this.classList.toggle('open')">
+                <div class="icon">⏱️</div>
+                <h3>Static Neck Loading</h3>
+                <p>Looking down during extended scrubbing tenses cervical extensors.</p>
+                <div class="detail">Medical-grade scrubbing requires 3-5 minutes of sustained downward gaze and focused
+                    attention. This static cervical loading causes ischemia in the neck extensors, building up metabolic
+                    waste products that trigger pain.</div>
+                <div class="tap">tap to learn more</div>
+            </div>
+        </div>
+    </section>
+    <div class="divider"></div>
 
-<!-- SECTION 6 -->
-<section id="s6" class="reveal">
-<div class="topic-header"><div class="num">06</div><div><h2>Backpack Loaded on One Side</h2><p>Asymmetrical loading and its systemic effects</p></div></div>
-<div class="cards">
-<div class="card" onclick="this.classList.toggle('open')">
-<div class="icon">🎒</div><h3>Lateral Deviation</h3><p>One-shoulder loading forces lateral spinal curvature.</p>
-<div class="detail">The spine develops a compensatory functional scoliosis to keep the center of gravity balanced. The paraspinal muscles on the opposite side must contract harder, leading to fatigue and pain in the contralateral quadratus lumborum.</div><div class="tap">tap to learn more</div></div>
-<div class="card" onclick="this.classList.toggle('open')">
-<div class="icon">⚖️</div><h3>Muscle Imbalance</h3><p>Loaded-side muscles become hypertonic; the other side weakens.</p>
-<div class="detail">The trapezius and quadratus lumborum on the loaded side develop chronic hypertonicity with trigger points, while the contralateral muscles gradually weaken — creating a persistent asymmetry that affects posture even without the bag.</div><div class="tap">tap to learn more</div></div>
-<div class="card" onclick="this.classList.toggle('open')">
-<div class="icon">🚶</div><h3>Gait Alteration</h3><p>Heavy asymmetric loads disrupt normal walking patterns.</p>
-<div class="detail">Normal reciprocal arm swing and pelvic counter-rotation are disrupted. The body shortens stride length on the loaded side and alters foot strike patterns, potentially leading to knee and ankle compensatory injuries over time.</div><div class="tap">tap to learn more</div></div>
-</div></section><div class="divider"></div>
+    <!-- SECTION 6 -->
+    <section id="s6" class="reveal">
+        <div class="topic-header">
+            <div class="num">06</div>
+            <div>
+                <h2>Backpack Loaded on One Side</h2>
+                <p>Asymmetrical loading and its systemic effects</p>
+            </div>
+        </div>
+        <div class="cards">
+            <div class="card" onclick="this.classList.toggle('open')">
+                <div class="icon">🎒</div>
+                <h3>Lateral Deviation</h3>
+                <p>One-shoulder loading forces lateral spinal curvature.</p>
+                <div class="detail">The spine develops a compensatory functional scoliosis to keep the center of gravity
+                    balanced. The paraspinal muscles on the opposite side must contract harder, leading to fatigue and
+                    pain in the contralateral quadratus lumborum.</div>
+                <div class="tap">tap to learn more</div>
+            </div>
+            <div class="card" onclick="this.classList.toggle('open')">
+                <div class="icon">⚖️</div>
+                <h3>Muscle Imbalance</h3>
+                <p>Loaded-side muscles become hypertonic; the other side weakens.</p>
+                <div class="detail">The trapezius and quadratus lumborum on the loaded side develop chronic
+                    hypertonicity with trigger points, while the contralateral muscles gradually weaken — creating a
+                    persistent asymmetry that affects posture even without the bag.</div>
+                <div class="tap">tap to learn more</div>
+            </div>
+            <div class="card" onclick="this.classList.toggle('open')">
+                <div class="icon">🚶</div>
+                <h3>Gait Alteration</h3>
+                <p>Heavy asymmetric loads disrupt normal walking patterns.</p>
+                <div class="detail">Normal reciprocal arm swing and pelvic counter-rotation are disrupted. The body
+                    shortens stride length on the loaded side and alters foot strike patterns, potentially leading to
+                    knee and ankle compensatory injuries over time.</div>
+                <div class="tap">tap to learn more</div>
+            </div>
+        </div>
+    </section>
+    <div class="divider"></div>
 
-<!-- SECTION 7 -->
-<section id="s7" class="reveal">
-<div class="topic-header"><div class="num">07</div><div><h2>Loading the Phone on the Pinky</h2><p>A modern-day ergonomic hazard from smartphone habits</p></div></div>
-<div class="cards">
-<div class="card" onclick="this.classList.toggle('open')">
-<div class="icon">📱</div><h3>Joint Deformation</h3><p>Constant stress on the 5th digit's DIP/PIP joints causes pain.</p>
-<div class="detail">The pinky's small joints were not designed for sustained load-bearing. Chronic mechanical stress can cause ligamentous laxity, subtle angular deformity, and localized inflammation of the joint capsule.</div><div class="tap">tap to learn more</div></div>
-<div class="card" onclick="this.classList.toggle('open')">
-<div class="icon">⚡</div><h3>Ulnar Neuropathy</h3><p>Awkward grips compress the ulnar nerve.</p>
-<div class="detail">Sustained gripping postures compress or stretch the ulnar nerve at Guyon's canal or the cubital tunnel, producing tingling in the ring and little fingers, and potential weakness of the intrinsic hand muscles over time.</div><div class="tap">tap to learn more</div></div>
-<div class="card" onclick="this.classList.toggle('open')">
-<div class="icon">🏋️</div><h3>Tendon Overuse</h3><p>Pinky flexor tendons aren't built for static smartphone weight.</p>
-<div class="detail">Modern smartphones weigh 200+ grams. The flexor digitorum superficialis and profundus of the 5th digit must maintain constant contraction, leading to tenosynovitis and potential triggering of the digit.</div><div class="tap">tap to learn more</div></div>
-</div></section><div class="divider"></div>
+    <!-- SECTION 7 -->
+    <section id="s7" class="reveal">
+        <div class="topic-header">
+            <div class="num">07</div>
+            <div>
+                <h2>Loading the Phone on the Pinky</h2>
+                <p>A modern-day ergonomic hazard from smartphone habits</p>
+            </div>
+        </div>
+        <div class="cards">
+            <div class="card" onclick="this.classList.toggle('open')">
+                <div class="icon">📱</div>
+                <h3>Joint Deformation</h3>
+                <p>Constant stress on the 5th digit's DIP/PIP joints causes pain.</p>
+                <div class="detail">The pinky's small joints were not designed for sustained load-bearing. Chronic
+                    mechanical stress can cause ligamentous laxity, subtle angular deformity, and localized inflammation
+                    of the joint capsule.</div>
+                <div class="tap">tap to learn more</div>
+            </div>
+            <div class="card" onclick="this.classList.toggle('open')">
+                <div class="icon">⚡</div>
+                <h3>Ulnar Neuropathy</h3>
+                <p>Awkward grips compress the ulnar nerve.</p>
+                <div class="detail">Sustained gripping postures compress or stretch the ulnar nerve at Guyon's canal or
+                    the cubital tunnel, producing tingling in the ring and little fingers, and potential weakness of the
+                    intrinsic hand muscles over time.</div>
+                <div class="tap">tap to learn more</div>
+            </div>
+            <div class="card" onclick="this.classList.toggle('open')">
+                <div class="icon">🏋️</div>
+                <h3>Tendon Overuse</h3>
+                <p>Pinky flexor tendons aren't built for static smartphone weight.</p>
+                <div class="detail">Modern smartphones weigh 200+ grams. The flexor digitorum superficialis and
+                    profundus of the 5th digit must maintain constant contraction, leading to tenosynovitis and
+                    potential triggering of the digit.</div>
+                <div class="tap">tap to learn more</div>
+            </div>
+        </div>
+    </section>
+    <div class="divider"></div>
 
-<!-- SECTION 8 -->
-<section id="s8" class="reveal">
-<div class="topic-header"><div class="num">08</div><div><h2>Computer Mouse & Carpal Tunnel</h2><p>Repetitive strain from improper mouse ergonomics</p></div></div>
-<div class="cards">
-<div class="card" onclick="this.classList.toggle('open')">
-<div class="icon">🖱️</div><h3>Wrist Extension</h3><p>Using a mouse without support holds the wrist in prolonged extension.</p>
-<div class="detail">Sustained wrist extension beyond 20° narrows the carpal tunnel, increasing pressure on the median nerve. An ergonomic mouse or wrist rest that maintains neutral alignment can reduce this pressure by up to 50%.</div><div class="tap">tap to learn more</div></div>
-<div class="card" onclick="this.classList.toggle('open')">
-<div class="icon">🫳</div><h3>Median Nerve Compression</h3><p>Increased tunnel pressure pinches the median nerve.</p>
-<div class="detail">Compression causes numbness and tingling in the thumb, index, and middle fingers. The classic presentation includes nocturnal symptoms, positive Phalen's test, and eventually thenar muscle atrophy if untreated.</div><div class="tap">tap to learn more</div></div>
-<div class="card" onclick="this.classList.toggle('open')">
-<div class="icon">↔️</div><h3>Ulnar Deviation</h3><p>Sweeping the mouse by pivoting at the wrist strains carpal ligaments.</p>
-<div class="detail">Mouse movements should originate from the elbow and shoulder, not the wrist. Wrist-pivoting creates repetitive ulnar deviation stress on the triangular fibrocartilage complex (TFCC) and carpal ligaments.</div><div class="tap">tap to learn more</div></div>
-</div></section><div class="divider"></div>
+    <!-- SECTION 8 -->
+    <section id="s8" class="reveal">
+        <div class="topic-header">
+            <div class="num">08</div>
+            <div>
+                <h2>Computer Mouse & Carpal Tunnel</h2>
+                <p>Repetitive strain from improper mouse ergonomics</p>
+            </div>
+        </div>
+        <div class="cards">
+            <div class="card" onclick="this.classList.toggle('open')">
+                <div class="icon">🖱️</div>
+                <h3>Wrist Extension</h3>
+                <p>Using a mouse without support holds the wrist in prolonged extension.</p>
+                <div class="detail">Sustained wrist extension beyond 20° narrows the carpal tunnel, increasing pressure
+                    on the median nerve. An ergonomic mouse or wrist rest that maintains neutral alignment can reduce
+                    this pressure by up to 50%.</div>
+                <div class="tap">tap to learn more</div>
+            </div>
+            <div class="card" onclick="this.classList.toggle('open')">
+                <div class="icon">🫳</div>
+                <h3>Median Nerve Compression</h3>
+                <p>Increased tunnel pressure pinches the median nerve.</p>
+                <div class="detail">Compression causes numbness and tingling in the thumb, index, and middle fingers.
+                    The classic presentation includes nocturnal symptoms, positive Phalen's test, and eventually thenar
+                    muscle atrophy if untreated.</div>
+                <div class="tap">tap to learn more</div>
+            </div>
+            <div class="card" onclick="this.classList.toggle('open')">
+                <div class="icon">↔️</div>
+                <h3>Ulnar Deviation</h3>
+                <p>Sweeping the mouse by pivoting at the wrist strains carpal ligaments.</p>
+                <div class="detail">Mouse movements should originate from the elbow and shoulder, not the wrist.
+                    Wrist-pivoting creates repetitive ulnar deviation stress on the triangular fibrocartilage complex
+                    (TFCC) and carpal ligaments.</div>
+                <div class="tap">tap to learn more</div>
+            </div>
+        </div>
+    </section>
+    <div class="divider"></div>
 
-<!-- TEAM -->
-<section id="team" class="reveal">
-<h2 class="section-title">Meet the <span class="gold">Team</span></h2>
-<p class="section-sub">Presentation participants who made this possible</p>
-<div class="team-grid" id="teamGrid"></div>
-</section>
+    <!-- TEAM -->
+    <section id="team" class="reveal">
+        <h2 class="section-title">Meet the <span class="gold">Team</span></h2>
+        <p class="section-sub">Presentation participants who made this possible</p>
+        <div class="team-grid" id="teamGrid"></div>
+    </section>
 
-<!-- QUESTIONS -->
-<div class="questions reveal">
-<h2>Questions<span class="gold">?</span></h2>
-<p>Thank you for your attention</p>
-<div class="quote">💡 "Awareness of bad posture is the first step in physical therapy!"</div>
-</div>
+    <!-- QUESTIONS -->
+    <div class="questions reveal">
+        <h2>Questions<span class="gold">?</span></h2>
+        <p>Thank you for your attention</p>
+        <div class="quote">study safly to do happilly</div>
+    </div>
 
-<footer>© 2026 Ergonomics in Physical Therapy — Interactive Presentation</footer>
+    <footer>© 2026 Ergonomics in Physical Therapy Sinai University-PT</footer>
 
-<script>
-// Team data
-const team=[
-["Abdulrahman Ali","202403424"],["Rawan Adel Ali","202404167"],["Omar Mohamed","202402206"],
-["Ehab Mohamed","202405031"],["Eman Magdeldeen","202404136"],["Rawan Mohamed","202403825"],
-["Habiba El-sayed","202404244"],["Sameh Samir","202403239"],["Habiba Samy","202401886"],
-["Ahmed Mostafa","202403622"],["Shadya Ahmed","202405159"],["Yasmen Maher","202404624"],
-["Sonata Atef","202403263"],["Shaza Mohamed","202405377"],["Reem Abdelrahman","202406063"],
-["Sara Elsayed","202403411"]
-];
-const tg=document.getElementById('teamGrid');
-team.forEach(([name,id])=>{
-const initials=name.split(' ').map(w=>w[0]).join('');
-tg.innerHTML+=`<div class="team-card"><div class="avatar">${initials}</div><h4>${name}</h4><span>ID: ${id}</span></div>`;
-});
+    <script>
+        // Team data
+        const team = [
+            ["Abdulrahman Ali", "202403424"], ["Rawan Adel Ali", "202404167"], ["Omar Mohamed", "202402206"],
+            ["Ehab Mohamed", "202405031"], ["Eman Magdeldeen", "202404136"], ["Rawan Mohamed", "202403825"],
+            ["Habiba El-sayed", "202404244"], ["Sameh Samir", "202403239"], ["Habiba Samy", "202401886"],
+            ["Ahmed Mostafa", "202403622"], ["Shadya Ahmed", "202405159"], ["Yasmen Maher", "202404624"],
+            ["Sonata Atef", "202403263"], ["Shaza Mohamed", "202405377"], ["Reem Abdelrahman", "202406063"],
+            ["Sara Elsayed", "202403411"]
+        ];
+        const tg = document.getElementById('teamGrid');
+        team.forEach(([name, id]) => {
+            const initials = name.split(' ').map(w => w[0]).join('');
+            tg.innerHTML += `<div class="team-card"><div class="avatar">${initials}</div><h4>${name}</h4><span>ID: ${id}</span></div>`;
+        });
 
-// Scroll reveal
-const obs=new IntersectionObserver(entries=>{
-entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}});
-},{threshold:.15});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+        // Scroll reveal
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target) } });
+        }, { threshold: .15 });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-// Close mobile nav on link click
-document.querySelectorAll('#navLinks a').forEach(a=>{
-a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open'));
-});
-</script>
+        // Close mobile nav on link click
+        document.querySelectorAll('#navLinks a').forEach(a => {
+            a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+        });
+    </script>
 </body>
+
 </html>
