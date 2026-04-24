@@ -29,6 +29,13 @@
             --accent: #E9D5FF
         }
 
+        /* FOCUS STATES */
+        :focus-visible {
+            outline: 2px solid var(--gold);
+            outline-offset: 4px;
+            border-radius: 4px;
+        }
+
         html {
             scroll-behavior: smooth
         }
@@ -569,7 +576,7 @@
             <a href="#s8">Mouse & CTS</a>
             <a href="#team">Team</a>
         </div>
-        <div class="burger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+        <div class="burger" role="button" tabindex="0" aria-label="Toggle navigation menu" onclick="document.getElementById('navLinks').classList.toggle('open')" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); this.click(); }">
             <span></span><span></span><span></span>
         </div>
     </nav>
@@ -579,7 +586,7 @@
         <h1>Ergonomics in<br><span class="gold">Physical Therapy</span></h1>
         <p>Your health is the most precious gift — <strong>KEEP IT SAFE</strong></p>
         <div class="badge">We observed what you did wrong and we corrected it</div>
-        <a href="#s1" class="scroll-arrow"><svg viewBox="0 0 24 24" stroke-width="2">
+        <a href="#s1" class="scroll-arrow" aria-label="Scroll to Lecture Hall section"><svg viewBox="0 0 24 24" stroke-width="2">
                 <path d="M12 5v14M19 12l-7 7-7-7" />
             </svg></a>
     </div>
@@ -953,6 +960,23 @@
         // Close mobile nav on link click
         document.querySelectorAll('#navLinks a').forEach(a => {
             a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+        });
+
+        // Add keyboard accessibility to cards
+        document.querySelectorAll('.card').forEach(card => {
+            card.setAttribute('role', 'button');
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('aria-expanded', 'false');
+            card.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+            card.addEventListener('click', function() {
+                const isOpen = this.classList.contains('open');
+                this.setAttribute('aria-expanded', isOpen.toString());
+            });
         });
     </script>
 </body>
