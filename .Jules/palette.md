@@ -1,0 +1,3 @@
+## 2024-04-24 - Interactive DIVs Missing Keyboard Accessibility
+**Learning:** Found a common pattern where `div` elements are used as interactive controls (cards toggling state, hamburger menu) using only `onclick` handlers. This completely excludes keyboard users and screen readers, as `div`s are not inherently focusable (`tabindex`), lack semantic meaning (`role="button"`), and don't natively respond to keyboard events (Enter/Space).
+**Action:** When identifying `div` or `span` elements acting as buttons, always enhance them with `role="button"`, `tabindex="0"`, and keydown event listeners for activation, or advocate for using native `<button>` elements. Ensure icon-only controls get appropriate `aria-label`s.
