@@ -949,6 +949,7 @@
 
     <footer>© 2026 Ergonomics in Physical Therapy Sinai University-PT</footer>
 
+    <script src="src/teamRenderer.js"></script>
     <script>
         // Team data
         const team = [
@@ -960,10 +961,7 @@
             ["Sara Elsayed", "202403411"]
         ];
         const tg = document.getElementById('teamGrid');
-        team.forEach(([name, id]) => {
-            const initials = name.split(' ').map(w => w[0]).join('');
-            tg.innerHTML += `<div class="team-card"><div class="avatar">${initials}</div><h4>${name}</h4><span>ID: ${id}</span></div>`;
-        });
+        tg.innerHTML = team.map(([name, id]) => generateTeamCard(name, id)).join('');
 
         // Scroll reveal
         const obs = new IntersectionObserver(entries => {
