@@ -941,7 +941,19 @@
         const tg = document.getElementById('teamGrid');
         team.forEach(([name, id]) => {
             const initials = name.split(' ').map(w => w[0]).join('');
-            tg.innerHTML += `<div class="team-card"><div class="avatar">${initials}</div><h4>${name}</h4><span>ID: ${id}</span></div>`;
+            const card = document.createElement('div');
+            card.className = 'team-card';
+            const avatar = document.createElement('div');
+            avatar.className = 'avatar';
+            avatar.textContent = initials;
+            const h4 = document.createElement('h4');
+            h4.textContent = name;
+            const span = document.createElement('span');
+            span.textContent = `ID: ${id}`;
+            card.appendChild(avatar);
+            card.appendChild(h4);
+            card.appendChild(span);
+            tg.appendChild(card);
         });
 
         // Scroll reveal
