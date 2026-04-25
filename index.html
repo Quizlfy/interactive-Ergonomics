@@ -939,10 +939,12 @@
             ["Sara Elsayed", "202403411"]
         ];
         const tg = document.getElementById('teamGrid');
+        let teamHTML = '';
         team.forEach(([name, id]) => {
             const initials = name.split(' ').map(w => w[0]).join('');
-            tg.innerHTML += `<div class="team-card"><div class="avatar">${initials}</div><h4>${name}</h4><span>ID: ${id}</span></div>`;
+            teamHTML += `<div class="team-card"><div class="avatar">${initials}</div><h4>${name}</h4><span>ID: ${id}</span></div>`;
         });
+        tg.innerHTML = teamHTML;
 
         // Scroll reveal
         const obs = new IntersectionObserver(entries => {
