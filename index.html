@@ -512,6 +512,28 @@
 
 
 
+
+        /* Skip Link */
+        .skip-link {
+            position: absolute;
+            top: -100px;
+            left: 20px;
+            background: var(--gold);
+            color: var(--bg);
+            padding: 10px 20px;
+            z-index: 9999;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 0 0 8px 8px;
+            transition: top 0.3s ease;
+        }
+
+        .skip-link:focus {
+            top: 0;
+            outline: 2px solid var(--accent);
+            outline-offset: -2px;
+        }
+
         /* ACCESSIBILITY */
         :focus-visible {
             outline: 2px solid var(--gold);
@@ -575,11 +597,12 @@
 </head>
 
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <nav>
         <div class="logo">⚕ ERGO PT</div>
         <div class="links" id="navLinks">
-            <a href="#hero">Home</a>
+            <a href="#main-content">Home</a>
             <a href="#s1">Lecture Hall</a>
             <a href="#s2">Computer</a>
             <a href="#s3">Low Desk</a>
@@ -596,7 +619,7 @@
     </nav>
 
     <!-- HERO -->
-    <div class="hero" id="hero">
+    <div class="hero" id="main-content" tabindex="-1">
         <h1>Ergonomics in<br><span class="gold">Physical Therapy</span></h1>
         <p>Your health is the most precious gift — <strong>KEEP IT SAFE</strong></p>
         <div class="badge">We observed what you did wrong and we corrected it</div>
