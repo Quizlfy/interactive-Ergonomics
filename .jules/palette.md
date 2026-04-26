@@ -1,3 +1,6 @@
 ## 2024-04-25 - Interactive Divs Need Explicit A11y Attributes
 **Learning:** In simple static HTML presentations, clickable interactive `div` elements (like `.card` or `.burger`) often rely solely on `onclick` handlers. This causes major accessibility regressions: they are unreachable by keyboard (no `tabindex`), have no focus state for keyboard users, and are invisible as interactive components to screen readers (missing `role="button"` and `aria-expanded`).
 **Action:** When auditing or implementing interactive `div` or `span` components, always add `role="button"`, `tabindex="0"`, a keyboard event listener (`onkeydown` checking for Enter/Space), and `:focus-visible` styles to ensure full parity with native `<button>` elements.
+## 2024-04-26 - Skip-to-content links in SPAs
+**Learning:** Skip-to-content links are especially critical in single-page applications with fixed sticky global navigations. Without them, keyboard users are forced to repetitively tab through the entire nav menu on every interaction that starts from the top.
+**Action:** Always add a visually hidden `#main-content` skip link as the very first focusable element in the DOM (right after `<body>`), and ensure the target container has `tabindex="-1"` so it reliably accepts focus programmatically across all browsers.
