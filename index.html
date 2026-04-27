@@ -513,6 +513,23 @@
 
 
         /* ACCESSIBILITY */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--gold);
+            color: var(--dp3);
+            padding: 8px;
+            z-index: 1000;
+            font-weight: 700;
+            transition: top 0.3s;
+            text-decoration: none;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
         :focus-visible {
             outline: 2px solid var(--gold);
             outline-offset: 4px;
@@ -575,7 +592,7 @@
 </head>
 
 <body>
-
+    <a href="#hero" class="skip-link">Skip to main content</a>
     <nav>
         <div class="logo">⚕ ERGO PT</div>
         <div class="links" id="navLinks">
