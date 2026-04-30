@@ -1,3 +1,3 @@
-## 2024-04-25 - Interactive Divs Need Explicit A11y Attributes
-**Learning:** In simple static HTML presentations, clickable interactive `div` elements (like `.card` or `.burger`) often rely solely on `onclick` handlers. This causes major accessibility regressions: they are unreachable by keyboard (no `tabindex`), have no focus state for keyboard users, and are invisible as interactive components to screen readers (missing `role="button"` and `aria-expanded`).
-**Action:** When auditing or implementing interactive `div` or `span` components, always add `role="button"`, `tabindex="0"`, a keyboard event listener (`onkeydown` checking for Enter/Space), and `:focus-visible` styles to ensure full parity with native `<button>` elements.
+## 2024-04-30 - Skip link styling vs no-custom-css
+**Learning:** Adding a basic accessibility feature like a 'skip-to-content' link introduces a visual bug if there is no pre-existing CSS to hide it (since custom CSS shouldn't be added to fix it).
+**Action:** When working under strict "no custom CSS" constraints, carefully check if the required utility classes exist before implementing a feature that fundamentally relies on CSS for correct visual presentation (like off-screen hiding).
