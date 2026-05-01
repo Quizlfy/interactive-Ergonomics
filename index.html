@@ -356,6 +356,14 @@
             text-transform: uppercase
         }
 
+        .card .tap::after {
+            content: 'tap to learn more';
+        }
+
+        .card.open .tap::after {
+            content: 'tap to close';
+        }
+
         /* TOPIC HEADER */
         .topic-header {
             display: flex;
@@ -622,7 +630,7 @@
                 <div class="detail">This flattens the lumbar curve, reversing the natural lordosis. Over time, it
                     increases pressure on the posterior annulus of the L4-L5 and L5-S1 discs, potentially leading to
                     disc bulges and chronic low back pain.</div>
-                <div class="tap">tap to learn more</div>
+                <div class="tap"></div>
             </div>
             <div class="card" role="button" tabindex="0" aria-expanded="false" onclick="const isOpen = this.classList.toggle('open'); this.setAttribute('aria-expanded', isOpen);" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
                 <div class="icon">👀</div>
@@ -631,7 +639,7 @@
                 <div class="detail">The upper cervical spine extends while the lower flexes, creating a "chin-poke"
                     posture. For every inch the head moves forward, it adds roughly 10 lbs of force on the cervical
                     spine, overloading the posterior neck muscles.</div>
-                <div class="tap">tap to learn more</div>
+                <div class="tap"></div>
             </div>
             <div class="card" role="button" tabindex="0" aria-expanded="false" onclick="const isOpen = this.classList.toggle('open'); this.setAttribute('aria-expanded', isOpen);" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
                 <div class="icon">📐</div>
@@ -640,7 +648,7 @@
                 <div class="detail">This uneven loading creates muscle imbalances between the left and right paraspinal
                     muscles. The intervertebral discs experience asymmetric compression, and the facet joints on the
                     concave side become overloaded.</div>
-                <div class="tap">tap to learn more</div>
+                <div class="tap"></div>
             </div>
         </div>
     </section>
@@ -663,7 +671,7 @@
                 <div class="detail">This classic pattern involves tight upper trapezius and levator scapulae paired with
                     weak deep cervical flexors, plus tight pectoralis major/minor paired with weak lower trapezius and
                     serratus anterior. It creates a self-reinforcing cycle of dysfunction.</div>
-                <div class="tap">tap to learn more</div>
+                <div class="tap"></div>
             </div>
             <div class="card" role="button" tabindex="0" aria-expanded="false" onclick="const isOpen = this.classList.toggle('open'); this.setAttribute('aria-expanded', isOpen);" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
                 <div class="icon">🫁</div>
@@ -672,7 +680,7 @@
                 <div class="detail">Excessive kyphosis reduces optimal breathing capacity by restricting rib cage
                     expansion. It can decrease lung volume by up to 30%, leading to shallow breathing patterns and
                     reduced oxygen delivery to tissues.</div>
-                <div class="tap">tap to learn more</div>
+                <div class="tap"></div>
             </div>
             <div class="card" role="button" tabindex="0" aria-expanded="false" onclick="const isOpen = this.classList.toggle('open'); this.setAttribute('aria-expanded', isOpen);" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
                 <div class="icon">👁️</div>
@@ -681,7 +689,7 @@
                 <div class="detail">The cervical extensors must constantly fight gravity to hold the head in a downward
                     gaze. This sustained isometric contraction leads to muscle fatigue, tension headaches, and
                     cervicogenic pain patterns.</div>
-                <div class="tap">tap to learn more</div>
+                <div class="tap"></div>
             </div>
         </div>
     </section>
@@ -704,7 +712,7 @@
                 <div class="detail">This dramatically increases intradiscal pressure in the cervical spine. At full
                     flexion, the load on cervical discs can increase by 5-6 times compared to neutral, accelerating
                     degenerative changes.</div>
-                <div class="tap">tap to learn more</div>
+                <div class="tap"></div>
             </div>
             <div class="card" role="button" tabindex="0" aria-expanded="false" onclick="const isOpen = this.classList.toggle('open'); this.setAttribute('aria-expanded', isOpen);" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
                 <div class="icon">🧘</div>
@@ -713,7 +721,7 @@
                 <div class="detail">Without a backrest, the erector spinae and multifidus must work continuously. This
                     leads to rapid muscle fatigue, causing the spine to default into flexion — further increasing disc
                     pressure.</div>
-                <div class="tap">tap to learn more</div>
+                <div class="tap"></div>
             </div>
             <div class="card" role="button" tabindex="0" aria-expanded="false" onclick="const isOpen = this.classList.toggle('open'); this.setAttribute('aria-expanded', isOpen);" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
                 <div class="icon">🦵</div>
@@ -722,7 +730,7 @@
                 <div class="detail">Adaptively shortened hip flexors pull the lumbar spine into lordosis when standing,
                     creating an anterior pelvic tilt. This cascading dysfunction affects gait, pelvic floor function,
                     and overall spinal alignment.</div>
-                <div class="tap">tap to learn more</div>
+                <div class="tap"></div>
             </div>
         </div>
     </section>
@@ -745,7 +753,7 @@
                 <div class="detail">This posture places up to 200% more pressure on the anterior vertebral discs
                     compared to upright sitting. The posterior ligaments are overstretched while the anterior structures
                     are compressed — a recipe for disc herniation.</div>
-                <div class="tap">tap to learn more</div>
+                <div class="tap"></div>
             </div>
             <div class="card" role="button" tabindex="0" aria-expanded="false" onclick="const isOpen = this.classList.toggle('open'); this.setAttribute('aria-expanded', isOpen);" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
                 <div class="icon">💪</div>
@@ -754,7 +762,7 @@
                 <div class="detail">Sustained elevation overworks the upper trapezius, causing trigger points and muscle
                     spasms. This can refer pain to the temporal region, causing tension-type headaches that are often
                     misdiagnosed.</div>
-                <div class="tap">tap to learn more</div>
+                <div class="tap"></div>
             </div>
             <div class="card" role="button" tabindex="0" aria-expanded="false" onclick="const isOpen = this.classList.toggle('open'); this.setAttribute('aria-expanded', isOpen);" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
                 <div class="icon">🦶</div>
@@ -763,7 +771,7 @@
                 <div class="detail">Posterior pelvic tilt from dangling feet flattens the lumbar lordosis, increases
                     sacral pressure, and compresses the ischial tuberosities. Using a footrest to achieve 90° knee
                     flexion corrects this chain.</div>
-                <div class="tap">tap to learn more</div>
+                <div class="tap"></div>
             </div>
         </div>
     </section>
@@ -786,7 +794,7 @@
                 <div class="detail">Low sinks force forward bending that can exceed 45° of lumbar flexion. At this
                     angle, the passive ligamentous system bears most of the load, and the erector spinae are at a
                     mechanical disadvantage — increasing injury risk.</div>
-                <div class="tap">tap to learn more</div>
+                <div class="tap"></div>
             </div>
             <div class="card" role="button" tabindex="0" aria-expanded="false" onclick="const isOpen = this.classList.toggle('open'); this.setAttribute('aria-expanded', isOpen);" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
                 <div class="icon">🤲</div>
@@ -795,7 +803,7 @@
                 <div class="detail">Repeated deviation from neutral wrist position irritates the carpal tunnel
                     structures and the extensor/flexor tendons. Healthcare workers who scrub 10+ times daily are at
                     significantly elevated risk for tendinopathy.</div>
-                <div class="tap">tap to learn more</div>
+                <div class="tap"></div>
             </div>
             <div class="card" role="button" tabindex="0" aria-expanded="false" onclick="const isOpen = this.classList.toggle('open'); this.setAttribute('aria-expanded', isOpen);" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
                 <div class="icon">⏱️</div>
@@ -804,7 +812,7 @@
                 <div class="detail">Medical-grade scrubbing requires 3-5 minutes of sustained downward gaze and focused
                     attention. This static cervical loading causes ischemia in the neck extensors, building up metabolic
                     waste products that trigger pain.</div>
-                <div class="tap">tap to learn more</div>
+                <div class="tap"></div>
             </div>
         </div>
     </section>
@@ -827,7 +835,7 @@
                 <div class="detail">The spine develops a compensatory functional scoliosis to keep the center of gravity
                     balanced. The paraspinal muscles on the opposite side must contract harder, leading to fatigue and
                     pain in the contralateral quadratus lumborum.</div>
-                <div class="tap">tap to learn more</div>
+                <div class="tap"></div>
             </div>
             <div class="card" role="button" tabindex="0" aria-expanded="false" onclick="const isOpen = this.classList.toggle('open'); this.setAttribute('aria-expanded', isOpen);" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
                 <div class="icon">⚖️</div>
@@ -836,7 +844,7 @@
                 <div class="detail">The trapezius and quadratus lumborum on the loaded side develop chronic
                     hypertonicity with trigger points, while the contralateral muscles gradually weaken — creating a
                     persistent asymmetry that affects posture even without the bag.</div>
-                <div class="tap">tap to learn more</div>
+                <div class="tap"></div>
             </div>
             <div class="card" role="button" tabindex="0" aria-expanded="false" onclick="const isOpen = this.classList.toggle('open'); this.setAttribute('aria-expanded', isOpen);" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
                 <div class="icon">🚶</div>
@@ -845,7 +853,7 @@
                 <div class="detail">Normal reciprocal arm swing and pelvic counter-rotation are disrupted. The body
                     shortens stride length on the loaded side and alters foot strike patterns, potentially leading to
                     knee and ankle compensatory injuries over time.</div>
-                <div class="tap">tap to learn more</div>
+                <div class="tap"></div>
             </div>
         </div>
     </section>
@@ -868,7 +876,7 @@
                 <div class="detail">The pinky's small joints were not designed for sustained load-bearing. Chronic
                     mechanical stress can cause ligamentous laxity, subtle angular deformity, and localized inflammation
                     of the joint capsule.</div>
-                <div class="tap">tap to learn more</div>
+                <div class="tap"></div>
             </div>
             <div class="card" role="button" tabindex="0" aria-expanded="false" onclick="const isOpen = this.classList.toggle('open'); this.setAttribute('aria-expanded', isOpen);" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
                 <div class="icon">⚡</div>
@@ -877,7 +885,7 @@
                 <div class="detail">Sustained gripping postures compress or stretch the ulnar nerve at Guyon's canal or
                     the cubital tunnel, producing tingling in the ring and little fingers, and potential weakness of the
                     intrinsic hand muscles over time.</div>
-                <div class="tap">tap to learn more</div>
+                <div class="tap"></div>
             </div>
             <div class="card" role="button" tabindex="0" aria-expanded="false" onclick="const isOpen = this.classList.toggle('open'); this.setAttribute('aria-expanded', isOpen);" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
                 <div class="icon">🏋️</div>
@@ -886,7 +894,7 @@
                 <div class="detail">Modern smartphones weigh 200+ grams. The flexor digitorum superficialis and
                     profundus of the 5th digit must maintain constant contraction, leading to tenosynovitis and
                     potential triggering of the digit.</div>
-                <div class="tap">tap to learn more</div>
+                <div class="tap"></div>
             </div>
         </div>
     </section>
@@ -909,7 +917,7 @@
                 <div class="detail">Sustained wrist extension beyond 20° narrows the carpal tunnel, increasing pressure
                     on the median nerve. An ergonomic mouse or wrist rest that maintains neutral alignment can reduce
                     this pressure by up to 50%.</div>
-                <div class="tap">tap to learn more</div>
+                <div class="tap"></div>
             </div>
             <div class="card" role="button" tabindex="0" aria-expanded="false" onclick="const isOpen = this.classList.toggle('open'); this.setAttribute('aria-expanded', isOpen);" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
                 <div class="icon">🫳</div>
@@ -918,7 +926,7 @@
                 <div class="detail">Compression causes numbness and tingling in the thumb, index, and middle fingers.
                     The classic presentation includes nocturnal symptoms, positive Phalen's test, and eventually thenar
                     muscle atrophy if untreated.</div>
-                <div class="tap">tap to learn more</div>
+                <div class="tap"></div>
             </div>
             <div class="card" role="button" tabindex="0" aria-expanded="false" onclick="const isOpen = this.classList.toggle('open'); this.setAttribute('aria-expanded', isOpen);" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
                 <div class="icon">↔️</div>
@@ -927,7 +935,7 @@
                 <div class="detail">Mouse movements should originate from the elbow and shoulder, not the wrist.
                     Wrist-pivoting creates repetitive ulnar deviation stress on the triangular fibrocartilage complex
                     (TFCC) and carpal ligaments.</div>
-                <div class="tap">tap to learn more</div>
+                <div class="tap"></div>
             </div>
         </div>
     </section>

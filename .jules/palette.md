@@ -1,3 +1,7 @@
 ## 2024-04-25 - Interactive Divs Need Explicit A11y Attributes
 **Learning:** In simple static HTML presentations, clickable interactive `div` elements (like `.card` or `.burger`) often rely solely on `onclick` handlers. This causes major accessibility regressions: they are unreachable by keyboard (no `tabindex`), have no focus state for keyboard users, and are invisible as interactive components to screen readers (missing `role="button"` and `aria-expanded`).
 **Action:** When auditing or implementing interactive `div` or `span` components, always add `role="button"`, `tabindex="0"`, a keyboard event listener (`onkeydown` checking for Enter/Space), and `:focus-visible` styles to ensure full parity with native `<button>` elements.
+
+## 2024-05-01 - Dynamic Helper Text Context in Expandable Cards
+**Learning:** Hardcoded helper text like "tap to learn more" on expandable cards creates cognitive dissonance when the card is already expanded. CSS pseudo-elements (`::after` with `content`) combined with the active state class (e.g., `.open`) provide a lightweight way to dynamically update this instructional text without complex JS or DOM manipulation, reducing noise for users while offering appropriate context.
+**Action:** When implementing expandable or toggleable UI elements with instructional helper text, use CSS state selectors (like `.card.open`) paired with `::after` content to automatically switch the helper text to match the current state (e.g., "tap to close") rather than using static hardcoded HTML text.
