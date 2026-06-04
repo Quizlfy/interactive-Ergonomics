@@ -1,3 +1,6 @@
 ## 2024-04-25 - Interactive Divs Need Explicit A11y Attributes
 **Learning:** In simple static HTML presentations, clickable interactive `div` elements (like `.card` or `.burger`) often rely solely on `onclick` handlers. This causes major accessibility regressions: they are unreachable by keyboard (no `tabindex`), have no focus state for keyboard users, and are invisible as interactive components to screen readers (missing `role="button"` and `aria-expanded`).
 **Action:** When auditing or implementing interactive `div` or `span` components, always add `role="button"`, `tabindex="0"`, a keyboard event listener (`onkeydown` checking for Enter/Space), and `:focus-visible` styles to ensure full parity with native `<button>` elements.
+## 2024-05-18 - Hide decorative visual elements from screen readers
+**Learning:** Purely decorative visual elements like initials (in avatars) and emojis should be hidden from screen readers using `aria-hidden="true"`. Without this, screen readers might announce these redundantly (e.g., spelling out initials followed by the full name, or reading out random emojis), confusing the user.
+**Action:** Always add `aria-hidden="true"` to visual embellishments that do not convey unique information beyond what is already provided in the text content.
